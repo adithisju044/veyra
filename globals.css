@@ -1,0 +1,738 @@
+
+@import "tailwindcss";
+
+/* ==========================================
+   VEYRA — IVORY & TERRACOTTA DESIGN SYSTEM
+   Outfit + IBM Plex Mono
+   ========================================== */
+
+:root {
+  --background: #F5F1E9;
+  --foreground: #352D29;
+
+  --veyra-ivory: #F5F1E9;
+  --veyra-sandstone: #E8DED1;
+  --veyra-terracotta: #AD765B;
+  --veyra-espresso: #352D29;
+  --veyra-copper: #C99A80;
+
+  --veyra-paper: #FFF9F1;
+  --veyra-muted: #806D61;
+  --veyra-border: #D7C6B8;
+  --veyra-surface: #FFF9F1;
+
+  /* Compatibility with older VEYRA pages */
+  --veyra-obsidian: #F5F1E9;
+  --veyra-graphite: #E8DED1;
+  --veyra-gold: #AD765B;
+  --veyra-amber: #C99A80;
+  --veyra-cyan: #AD765B;
+  --veyra-violet: #C99A80;
+  --veyra-green: #AD765B;
+  --veyra-blue: #AD765B;
+
+  --veyra-font-main: var(--font-outfit), Arial, sans-serif;
+  --veyra-font-data:
+    var(--font-ibm-plex-mono), monospace;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+/* ==========================================
+   RESET & TYPOGRAPHY
+   ========================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--veyra-font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #E8DED1;
+  color: #352D29;
+}
+
+:focus-visible {
+  outline: 2px solid #AD765B;
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   TYPOGRAPHY HELPERS
+   ========================================== */
+
+.veyra-font-main {
+  font-family: var(--veyra-font-main);
+}
+
+.veyra-font-data,
+.veyra-mono,
+.veyra-stat,
+.veyra-number {
+  font-family: var(--veyra-font-data);
+  font-variant-numeric: tabular-nums;
+}
+
+.veyra-heading {
+  font-family: var(--veyra-font-main);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.veyra-label {
+  font-family: var(--veyra-font-data);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   GLOBAL SCROLLBARS
+   ========================================== */
+
+html,
+body,
+* {
+  scrollbar-color: #AD765B #E8DED1;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8DED1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #AD765B;
+  border: 2px solid #E8DED1;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C99A80;
+}
+
+::-webkit-scrollbar-corner {
+  background: #E8DED1;
+}
+
+/* Dashboard-specific scrollbar override */
+
+.veyra-dashboard,
+.veyra-dashboard *,
+.veyra-scroll,
+.veyra-scroll * {
+  scrollbar-color: #AD765B #E8DED1 !important;
+  scrollbar-width: thin;
+}
+
+.veyra-dashboard ::-webkit-scrollbar,
+.veyra-scroll::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.veyra-dashboard ::-webkit-scrollbar-track,
+.veyra-scroll::-webkit-scrollbar-track {
+  background: #E8DED1 !important;
+}
+
+.veyra-dashboard ::-webkit-scrollbar-thumb,
+.veyra-scroll::-webkit-scrollbar-thumb {
+  background: #AD765B !important;
+  border: 2px solid #E8DED1;
+  border-radius: 2px;
+}
+
+/* ==========================================
+   DASHBOARD FONT OVERRIDE
+   ========================================== */
+
+.veyra-dashboard {
+  font-family: var(--veyra-font-main) !important;
+}
+
+.veyra-dashboard button,
+.veyra-dashboard input,
+.veyra-dashboard select,
+.veyra-dashboard textarea {
+  font-family: var(--veyra-font-main);
+}
+
+.veyra-dashboard h1,
+.veyra-dashboard h2,
+.veyra-dashboard h3,
+.veyra-dashboard h4 {
+  font-family: var(--veyra-font-main);
+  letter-spacing: -0.035em;
+}
+
+.veyra-dashboard .veyra-mono,
+.veyra-dashboard .veyra-stat,
+.veyra-dashboard .veyra-number,
+.veyra-dashboard .veyra-font-data {
+  font-family: var(--veyra-font-data) !important;
+}
+
+/* ==========================================
+   BACKGROUND GRID
+   Kept for compatibility with existing pages
+   ========================================== */
+
+.bg-grid {
+  opacity: 0.28;
+  background-image:
+    linear-gradient(
+      rgba(173, 118, 91, 0.09) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(173, 118, 91, 0.09) 1px,
+      transparent 1px
+    );
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(
+    circle at 58% 50%,
+    black 0%,
+    rgba(0, 0, 0, 0.8) 35%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    circle at 58% 50%,
+    black 0%,
+    rgba(0, 0, 0, 0.8) 35%,
+    transparent 78%
+  );
+}
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: #806D61;
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.nav-link:hover {
+  color: #AD765B;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #AD765B;
+  transition:
+    width 200ms ease,
+    left 200ms ease;
+}
+
+.nav-link:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+/* ==========================================
+   VEYRA MARK
+   Retained for homepage compatibility
+   ========================================== */
+
+.veyra-mark {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 27px;
+  height: 27px;
+  border: 1px solid #AD765B;
+  border-radius: 2px;
+  background: #E8DED1;
+  box-shadow: 3px 3px 0 #C99A80;
+}
+
+.veyra-mark::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid #AD765B;
+}
+
+.veyra-mark::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #AD765B;
+}
+
+/* ==========================================
+   SYSTEM STATUS
+   ========================================== */
+
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #AD765B;
+  box-shadow: 0 0 0 3px #E8DED1;
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ==========================================
+   LEGACY HOMEPAGE SCULPTURE
+   Preserved so existing markup still works
+   ========================================== */
+
+.sphere-aura {
+  background: radial-gradient(
+    circle,
+    rgba(173, 118, 91, 0.18),
+    rgba(201, 154, 128, 0.1) 38%,
+    transparent 73%
+  );
+  filter: blur(28px);
+  transform: scale(1.35);
+  animation: sphereAuraBreath 8s ease-in-out infinite;
+}
+
+@keyframes sphereAuraBreath {
+  0%,
+  100% {
+    opacity: 0.7;
+    filter: blur(28px);
+  }
+
+  50% {
+    opacity: 1;
+    filter: blur(38px);
+  }
+}
+
+.data-sphere {
+  border: 1px solid #D7C6B8;
+  background:
+    radial-gradient(
+      circle at 65% 34%,
+      rgba(255, 249, 241, 0.7),
+      transparent 12%
+    ),
+    radial-gradient(
+      circle at 36% 65%,
+      rgba(201, 154, 128, 0.3),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 48% 50%,
+      #E8DED1,
+      #AD765B 90%
+    );
+  box-shadow:
+    inset -35px -25px 70px rgba(53, 45, 41, 0.2),
+    12px 14px 0 rgba(173, 118, 91, 0.18);
+}
+
+.sphere-grid {
+  opacity: 0.25;
+  background-image:
+    linear-gradient(
+      rgba(53, 45, 41, 0.15) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(53, 45, 41, 0.15) 1px,
+      transparent 1px
+    );
+  background-size: 27px 27px;
+  -webkit-mask-image: radial-gradient(
+    circle,
+    black 20%,
+    rgba(0, 0, 0, 0.8) 45%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    circle,
+    black 20%,
+    rgba(0, 0, 0, 0.8) 45%,
+    transparent 78%
+  );
+  transform:
+    perspective(500px)
+    rotate(-9deg)
+    scale(1.2);
+}
+
+.sphere-shadow {
+  background:
+    radial-gradient(
+      circle at 67% 28%,
+      rgba(255, 249, 241, 0.5),
+      transparent 20%
+    ),
+    linear-gradient(
+      120deg,
+      transparent 25%,
+      rgba(173, 118, 91, 0.12),
+      transparent 70%
+    );
+}
+
+/* ==========================================
+   LEGACY PANEL CLASSES
+   ========================================== */
+
+.veyra-glass {
+  background: #FFF9F1;
+  border: 1px solid #D7C6B8;
+  border-radius: 2px;
+  box-shadow:
+    5px 5px 0 #C99A80,
+    8px 10px 18px rgba(53, 45, 41, 0.06);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+.veyra-glass:hover {
+  border-color: #AD765B;
+}
+
+.veyra-hud {
+  position: relative;
+  overflow: hidden;
+  background: #FFF9F1;
+  border: 1px solid #D7C6B8;
+  border-radius: 2px;
+  box-shadow:
+    5px 5px 0 #C99A80,
+    8px 10px 18px rgba(53, 45, 41, 0.06);
+}
+
+.veyra-hud::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 64px;
+  height: 2px;
+  background: #AD765B;
+  pointer-events: none;
+}
+
+/* ==========================================
+   LEGACY GLOW UTILITIES
+   Converted to subtle warm shadows
+   ========================================== */
+
+.veyra-glow-blue,
+.veyra-glow-violet,
+.veyra-glow-gold,
+.veyra-glow-cyan {
+  box-shadow:
+    4px 4px 0 rgba(173, 118, 91, 0.2),
+    8px 10px 20px rgba(53, 45, 41, 0.06);
+}
+
+.veyra-gradient-text,
+.veyra-holographic-text {
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: #352D29;
+  color: #352D29;
+}
+
+/* ==========================================
+   CUBICAL BUTTONS
+   ========================================== */
+
+.veyra-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 2px;
+  font-family: var(--veyra-font-main);
+  transition:
+    transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.veyra-button:hover:not(:disabled) {
+  transform: translate(-1px, -2px);
+}
+
+.veyra-button:active:not(:disabled) {
+  transform: translate(3px, 3px);
+}
+
+.veyra-button-primary {
+  background: #AD765B;
+  color: #FFF9F1;
+  border: 1px solid #AD765B;
+  box-shadow: 4px 4px 0 #806D61;
+}
+
+.veyra-button-primary:hover:not(:disabled) {
+  background: #C99A80;
+}
+
+.veyra-button-primary:active:not(:disabled) {
+  box-shadow: 1px 1px 0 #806D61;
+}
+
+.veyra-button-holo {
+  color: #352D29;
+  background: #F5F1E9;
+  border: 1px solid #D7C6B8;
+  box-shadow: 4px 4px 0 #C99A80;
+}
+
+.veyra-button-holo:hover:not(:disabled) {
+  background: #E8DED1;
+  border-color: #AD765B;
+}
+
+.veyra-button-holo:active:not(:disabled) {
+  box-shadow: 1px 1px 0 #C99A80;
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes veyraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.veyra-fade-up {
+  animation: veyraFadeUp 700ms ease-out both;
+}
+
+@keyframes veyraFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.veyra-float {
+  animation: veyraFloat 7s ease-in-out infinite;
+}
+
+@keyframes veyraScan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  20%,
+  80% {
+    opacity: 0.35;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.veyra-scan-line {
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(173, 118, 91, 0.12),
+    transparent
+  );
+  animation: veyraScan 7s linear infinite;
+}
+
+@keyframes veyraSignal {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.veyra-signal {
+  animation: veyraSignal 2.5s ease-in-out infinite;
+}
+
+/* ==========================================
+   ATMOSPHERIC NOISE
+   ========================================== */
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  opacity: 0.012;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* ==========================================
+   RESPONSIVE & ACCESSIBILITY
+   ========================================== */
+
+@media (max-width: 768px) {
+  .bg-grid {
+    background-size: 48px 48px;
+  }
+
+  .sphere-aura {
+    filter: blur(20px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================
+   VEYRA — DASHBOARD TYPOGRAPHY
+   Outfit + IBM Plex Mono
+   ========================================== */
+
+/* Main interface */
+.veyra-dashboard,
+.veyra-dashboard button,
+.veyra-dashboard input,
+.veyra-dashboard select,
+.veyra-dashboard textarea {
+  font-family: var(--font-outfit), Arial, sans-serif !important;
+}
+
+/* Headings */
+.veyra-dashboard h1,
+.veyra-dashboard h2,
+.veyra-dashboard h3,
+.veyra-dashboard h4 {
+  font-family: var(--font-outfit), Arial, sans-serif !important;
+  letter-spacing: -0.035em;
+}
+
+/* Technical data */
+.veyra-dashboard .veyra-mono,
+.veyra-dashboard .veyra-stat,
+.veyra-dashboard .veyra-number,
+.veyra-dashboard .veyra-font-data,
+.veyra-dashboard code,
+.veyra-dashboard pre {
+  font-family:
+    var(--font-ibm-plex-mono),
+    monospace !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Dataset tables */
+.veyra-dashboard table td {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Terracotta scrollbars */
+.veyra-dashboard,
+.veyra-dashboard * {
+  scrollbar-color: #AD765B #E8DED1 !important;
+}
